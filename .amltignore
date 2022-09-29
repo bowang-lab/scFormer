@@ -1,0 +1,13 @@
+.pytest_cache
+.vscode
+amlt/
+data/
+save/
+figures/
+tests/
+tmp/
+runs/
+wandb/
+*.pt
+*.pth
+*.ipynb
