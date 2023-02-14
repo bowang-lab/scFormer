@@ -13,7 +13,6 @@ if not logger.hasHandlers():
     handler.setFormatter(formatter)
     logger.addHandler(handler)
 
-from .scformer import *
-from . import model, tokenizer, scbank, utils
+from . import model, tokenizer, utils
 from .data_collator import DataCollator
 from .data_sampler import SubsetsBatchSampler

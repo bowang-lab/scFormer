@@ -6,7 +6,6 @@ numba==0.55.2
 scanpy
 scikit-learn
 scipy
-scvi-tools
 tensorboard>=2.4,<2.5
 protobuf>=3.9.2,<3.20
 transformers==4.18.0
@@ -16,4 +15,6 @@ umap-learn
 scib==1.0.3
 igraph<=0.9.11
 python-igraph<=0.9.11
-torch>=1.9.0,<1.10
+torch==1.9.1
+torchtext==0.10.1
+setuptools==59.5.0
