@@ -1,0 +1,146 @@
+    reading data/pbmc8k/filtered_gene_bc_matrices/GRCh38/matrix.mtx
+--> This might be very slow. Consider passing `cache=True`, which enables much faster reading from a cache file.
+filtered out 12269 genes that are detected in less than 1 counts
+    reading data/pbmc4k/filtered_gene_bc_matrices/GRCh38/matrix.mtx
+--> This might be very slow. Consider passing `cache=True`, which enables much faster reading from a cache file.
+filtered out 13921 genes that are detected in less than 1 counts
+normalizing counts per cell
+    finished (0:00:00)
+extracting highly variable genes
+    finished
+--> added
+    'highly_variable', boolean vector (adata.var)
+    'means', float vector (adata.var)
+    'dispersions', float vector (adata.var)
+    'dispersions_norm', float vector (adata.var)
+AnnData object with n_obs × n_vars = 11990 × 999
+    obs: 'n_counts', 'batch', 'labels', 'str_labels', 'str_batch'
+    var: 'gene_symbols', 'n_counts-0', 'n_counts-1', 'n_counts', 'highly_variable', 'means', 'dispersions', 'dispersions_norm'
+    uns: 'cell_types', 'log1p', 'hvg'
+    obsm: 'design', 'raw_qc', 'normalized_qc', 'qc_pc'
+    layers: 'counts'
+max num of non_zero genes: 437
+min num of non_zero genes: 45
+average num of non_zero genes: 119.62616995644518
+99% quantile num of non_zero genes: 253.10000000000036
+max original values: 329.0
+average original non_zero values: 1.895390510559082
+99% quantile original non_zero values: 13.0
+num of celltypes: 9
+train set number of samples: 10791, 
+	 feature length: 438
+valid set number of samples: 1199, 
+	 feature length: 438
+Finish masking, ratio of masked values in train: 0.1460
+| epoch   1 | 100/337 batches | lr 0.0001 | ms/batch 105.74 | loss 40.97 | mse  4.01 | mre  0.55 |cls  2.01 | cce 34.94 |
+| epoch   1 | 200/337 batches | lr 0.0002 | ms/batch 104.05 | loss 35.41 | mse  3.45 | mre  0.52 |cls  1.45 | cce 30.51 |
+| epoch   1 | 300/337 batches | lr 0.0003 | ms/batch 103.98 | loss 29.43 | mse  3.03 | mre  0.53 |cls  0.94 | cce 25.46 |
+-----------------------------------------------------------------------------------------
+| end of epoch   1 | time: 36.11s | valid loss/mse 2.8916 | mre 0.5491
+-----------------------------------------------------------------------------------------
+Finish masking, ratio of masked values in train: 0.1460
+| epoch   2 | 100/337 batches | lr 0.0004 | ms/batch 105.35 | loss 26.86 | mse  2.69 | mre  0.50 |cls  0.66 | cce 23.51 |
+| epoch   2 | 200/337 batches | lr 0.0005 | ms/batch 104.19 | loss 25.25 | mse  2.41 | mre  0.50 |cls  0.56 | cce 22.28 |
+| epoch   2 | 300/337 batches | lr 0.0006 | ms/batch 104.15 | loss 24.50 | mse  2.18 | mre  0.47 |cls  0.45 | cce 21.88 |
+-----------------------------------------------------------------------------------------
+| end of epoch   2 | time: 36.10s | valid loss/mse 2.0300 | mre 0.4157
+-----------------------------------------------------------------------------------------
+Finish masking, ratio of masked values in train: 0.1460
+| epoch   3 | 100/337 batches | lr 0.0008 | ms/batch 105.48 | loss 24.08 | mse  2.05 | mre  0.47 |cls  0.44 | cce 21.58 |
+| epoch   3 | 200/337 batches | lr 0.0009 | ms/batch 104.20 | loss 22.98 | mse  1.85 | mre  0.46 |cls  0.38 | cce 20.75 |
+| epoch   3 | 300/337 batches | lr 0.0010 | ms/batch 104.13 | loss 22.60 | mse  1.69 | mre  0.46 |cls  0.35 | cce 20.56 |
+-----------------------------------------------------------------------------------------
+| end of epoch   3 | time: 36.12s | valid loss/mse 1.5705 | mre 0.4497
+-----------------------------------------------------------------------------------------
+Finish masking, ratio of masked values in train: 0.1460
+| epoch   4 | 100/337 batches | lr 0.0010 | ms/batch 105.52 | loss 22.48 | mse  1.67 | mre  0.46 |cls  0.36 | cce 20.45 |
+| epoch   4 | 200/337 batches | lr 0.0010 | ms/batch 104.25 | loss 21.94 | mse  1.61 | mre  0.44 |cls  0.34 | cce 19.98 |
+| epoch   4 | 300/337 batches | lr 0.0010 | ms/batch 104.44 | loss 21.73 | mse  1.50 | mre  0.42 |cls  0.30 | cce 19.93 |
+-----------------------------------------------------------------------------------------
+| end of epoch   4 | time: 36.18s | valid loss/mse 1.3210 | mre 0.3380
+-----------------------------------------------------------------------------------------
+Finish masking, ratio of masked values in train: 0.1460
+| epoch   5 | 100/337 batches | lr 0.0010 | ms/batch 105.38 | loss 21.85 | mse  1.49 | mre  0.42 |cls  0.31 | cce 20.05 |
+| epoch   5 | 200/337 batches | lr 0.0010 | ms/batch 103.89 | loss 21.41 | mse  1.48 | mre  0.42 |cls  0.29 | cce 19.64 |
+| epoch   5 | 300/337 batches | lr 0.0010 | ms/batch 104.34 | loss 21.27 | mse  1.41 | mre  0.40 |cls  0.25 | cce 19.61 |
+-----------------------------------------------------------------------------------------
+| end of epoch   5 | time: 36.11s | valid loss/mse 1.3764 | mre 0.3929
+-----------------------------------------------------------------------------------------
+Finish masking, ratio of masked values in train: 0.1460
+| epoch   6 | 100/337 batches | lr 0.0010 | ms/batch 105.27 | loss 21.51 | mse  1.44 | mre  0.41 |cls  0.27 | cce 19.79 |
+| epoch   6 | 200/337 batches | lr 0.0010 | ms/batch 104.14 | loss 20.99 | mse  1.40 | mre  0.40 |cls  0.23 | cce 19.36 |
+| epoch   6 | 300/337 batches | lr 0.0010 | ms/batch 104.33 | loss 20.94 | mse  1.35 | mre  0.39 |cls  0.24 | cce 19.35 |
+-----------------------------------------------------------------------------------------
+| end of epoch   6 | time: 36.13s | valid loss/mse 1.2859 | mre 0.3574
+-----------------------------------------------------------------------------------------
+Finish masking, ratio of masked values in train: 0.1460
+| epoch   7 | 100/337 batches | lr 0.0010 | ms/batch 105.40 | loss 21.10 | mse  1.37 | mre  0.39 |cls  0.24 | cce 19.49 |
+| epoch   7 | 200/337 batches | lr 0.0010 | ms/batch 104.56 | loss 20.75 | mse  1.37 | mre  0.38 |cls  0.20 | cce 19.18 |
+| epoch   7 | 300/337 batches | lr 0.0009 | ms/batch 105.01 | loss 20.72 | mse  1.30 | mre  0.38 |cls  0.23 | cce 19.19 |
+-----------------------------------------------------------------------------------------
+| end of epoch   7 | time: 36.27s | valid loss/mse 1.2603 | mre 0.2970
+-----------------------------------------------------------------------------------------
+Finish masking, ratio of masked values in train: 0.1460
+| epoch   8 | 100/337 batches | lr 0.0009 | ms/batch 106.14 | loss 20.88 | mse  1.33 | mre  0.38 |cls  0.22 | cce 19.33 |
+| epoch   8 | 200/337 batches | lr 0.0009 | ms/batch 104.96 | loss 20.54 | mse  1.28 | mre  0.37 |cls  0.20 | cce 19.06 |
+| epoch   8 | 300/337 batches | lr 0.0009 | ms/batch 105.03 | loss 20.53 | mse  1.27 | mre  0.38 |cls  0.19 | cce 19.06 |
+-----------------------------------------------------------------------------------------
+| end of epoch   8 | time: 36.39s | valid loss/mse 1.1889 | mre 0.3296
+-----------------------------------------------------------------------------------------
+Finish masking, ratio of masked values in train: 0.1460
+| epoch   9 | 100/337 batches | lr 0.0009 | ms/batch 106.79 | loss 20.69 | mse  1.31 | mre  0.38 |cls  0.21 | cce 19.17 |
+| epoch   9 | 200/337 batches | lr 0.0009 | ms/batch 105.31 | loss 20.35 | mse  1.29 | mre  0.37 |cls  0.18 | cce 18.88 |
+| epoch   9 | 300/337 batches | lr 0.0009 | ms/batch 105.16 | loss 20.31 | mse  1.27 | mre  0.37 |cls  0.18 | cce 18.85 |
+-----------------------------------------------------------------------------------------
+| end of epoch   9 | time: 36.52s | valid loss/mse 1.2181 | mre 0.2813
+-----------------------------------------------------------------------------------------
+Finish masking, ratio of masked values in train: 0.1460
+| epoch  10 | 100/337 batches | lr 0.0009 | ms/batch 106.17 | loss 20.52 | mse  1.30 | mre  0.37 |cls  0.19 | cce 19.03 |
+| epoch  10 | 200/337 batches | lr 0.0009 | ms/batch 105.11 | loss 20.18 | mse  1.28 | mre  0.37 |cls  0.17 | cce 18.73 |
+| epoch  10 | 300/337 batches | lr 0.0008 | ms/batch 105.23 | loss 20.16 | mse  1.23 | mre  0.36 |cls  0.17 | cce 18.76 |
+-----------------------------------------------------------------------------------------
+| end of epoch  10 | time: 36.42s | valid loss/mse 1.2744 | mre 0.2962
+-----------------------------------------------------------------------------------------
+Finish masking, ratio of masked values in train: 0.1460
+| epoch  11 | 100/337 batches | lr 0.0008 | ms/batch 106.16 | loss 20.40 | mse  1.27 | mre  0.36 |cls  0.17 | cce 18.96 |
+| epoch  11 | 200/337 batches | lr 0.0008 | ms/batch 105.38 | loss 20.11 | mse  1.28 | mre  0.36 |cls  0.15 | cce 18.67 |
+| epoch  11 | 300/337 batches | lr 0.0008 | ms/batch 105.35 | loss 20.08 | mse  1.23 | mre  0.36 |cls  0.15 | cce 18.70 |
+-----------------------------------------------------------------------------------------
+| end of epoch  11 | time: 36.51s | valid loss/mse 1.2219 | mre 0.3351
+-----------------------------------------------------------------------------------------
+Finish masking, ratio of masked values in train: 0.1460
+| epoch  12 | 100/337 batches | lr 0.0008 | ms/batch 106.46 | loss 20.22 | mse  1.22 | mre  0.36 |cls  0.16 | cce 18.84 |
+| epoch  12 | 200/337 batches | lr 0.0008 | ms/batch 105.34 | loss 19.99 | mse  1.23 | mre  0.36 |cls  0.15 | cce 18.60 |
+| epoch  12 | 300/337 batches | lr 0.0008 | ms/batch 104.49 | loss 19.93 | mse  1.19 | mre  0.36 |cls  0.14 | cce 18.61 |
+-----------------------------------------------------------------------------------------
+| end of epoch  12 | time: 36.38s | valid loss/mse 1.1714 | mre 0.3402
+-----------------------------------------------------------------------------------------
+Finish masking, ratio of masked values in train: 0.1460
+| epoch  13 | 100/337 batches | lr 0.0007 | ms/batch 105.71 | loss 20.15 | mse  1.25 | mre  0.37 |cls  0.15 | cce 18.75 |
+| epoch  13 | 200/337 batches | lr 0.0007 | ms/batch 104.49 | loss 19.84 | mse  1.20 | mre  0.36 |cls  0.14 | cce 18.49 |
+| epoch  13 | 300/337 batches | lr 0.0007 | ms/batch 104.65 | loss 19.89 | mse  1.21 | mre  0.36 |cls  0.15 | cce 18.53 |
+-----------------------------------------------------------------------------------------
+| end of epoch  13 | time: 36.22s | valid loss/mse 1.1814 | mre 0.3221
+-----------------------------------------------------------------------------------------
+Finish masking, ratio of masked values in train: 0.1460
+| epoch  14 | 100/337 batches | lr 0.0007 | ms/batch 105.37 | loss 20.03 | mse  1.20 | mre  0.36 |cls  0.14 | cce 18.69 |
+| epoch  14 | 200/337 batches | lr 0.0007 | ms/batch 104.55 | loss 19.80 | mse  1.23 | mre  0.36 |cls  0.13 | cce 18.43 |
+| epoch  14 | 300/337 batches | lr 0.0006 | ms/batch 104.75 | loss 19.80 | mse  1.19 | mre  0.36 |cls  0.13 | cce 18.48 |
+-----------------------------------------------------------------------------------------
+| end of epoch  14 | time: 36.24s | valid loss/mse 1.1108 | mre 0.3129
+-----------------------------------------------------------------------------------------
+Finish masking, ratio of masked values in train: 0.1460
+| epoch  15 | 100/337 batches | lr 0.0006 | ms/batch 105.79 | loss 19.98 | mse  1.17 | mre  0.35 |cls  0.13 | cce 18.68 |
+| epoch  15 | 200/337 batches | lr 0.0006 | ms/batch 104.58 | loss 19.78 | mse  1.25 | mre  0.36 |cls  0.13 | cce 18.40 |
+| epoch  15 | 300/337 batches | lr 0.0006 | ms/batch 104.33 | loss 19.68 | mse  1.19 | mre  0.35 |cls  0.13 | cce 18.36 |
+-----------------------------------------------------------------------------------------
+| end of epoch  15 | time: 36.23s | valid loss/mse 1.1531 | mre 0.3115
+-----------------------------------------------------------------------------------------
+Finish masking, ratio of masked values in train: 0.1460
+| epoch  16 | 100/337 batches | lr 0.0006 | ms/batch 105.91 | loss 19.91 | mse  1.22 | mre  0.36 |cls  0.12 | cce 18.56 |
+| epoch  16 | 200/337 batches | lr 0.0005 | ms/batch 104.31 | loss 19.70 | mse  1.20 | mre  0.35 |cls  0.12 | cce 18.38 |
+| epoch  16 | 300/337 batches | lr 0.0005 | ms/batch 104.42 | loss 19.62 | mse  1.17 | mre  0.35 |cls  0.12 | cce 18.34 |
+-----------------------------------------------------------------------------------------
+| end of epoch  16 | time: 36.21s | valid loss/mse 1.1767 | mre 0.3009
+-----------------------------------------------------------------------------------------
+Finish masking, ratio of masked values in train: 0.1460
