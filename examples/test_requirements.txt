@@ -1,0 +1,18 @@
+anndata<=0.9
+llvmlite==0.38.1; python_version >= "3.7" and python_version < "3.11"
+matplotlib>=3.4,<3.5
+networkx
+numba==0.55.2
+scanpy
+scikit-learn
+scipy
+scvi-tools
+tensorboard>=2.4,<2.5
+protobuf>=3.9.2,<3.20
+transformers==4.18.0
+datasets>=2.1.0,<2.4
+typing-extensions>=4.2.0
+umap-learn
+scib==1.0.3
+igraph<=0.9.11
+python-igraph<=0.9.11
