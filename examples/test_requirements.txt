@@ -16,3 +16,4 @@ umap-learn
 scib==1.0.3
 igraph<=0.9.11
 python-igraph<=0.9.11
+torch>=1.9.0,<1.10
