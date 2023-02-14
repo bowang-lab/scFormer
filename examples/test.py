@@ -7,11 +7,9 @@ import copy
 from pathlib import Path
 from typing import List, Tuple, Dict, Union, Optional
 
-import scvi
 import scanpy as sc
 import numpy as np
 import torch
-import transformers
 import matplotlib.pyplot as plt
 from torch import nn
 from sklearn.metrics import adjusted_rand_score, normalized_mutual_info_score
@@ -20,7 +18,6 @@ from torchtext._torchtext import Vocab as VocabPybind
 
 sys.path.insert(0, "../")
 import scformer as scf
-from scformer import ScFormerModel, ScFormerConfig, ScFormerTokenizer
 from scformer.model import TransformerModel
 from scformer.tokenizer import tokenize_and_pad_batch, random_mask_value
 from scformer import logger
@@ -110,14 +107,13 @@ parser.add_argument(
 
 
 if scf.utils.isnotebook():
-    model_mnt_dir = "/home/v-haotiancui/blobfuse/haotiancui-blob-amulet/output/"
-    model_name = "finetune-pbmc-Jul18-00-05-2022"
+    model_name = "pbmc-Jun09-22-32-2022"
     args = parser.parse_args(
         args=[
             "-d",
             "pbmc_dataset",
             "-m",
-            model_mnt_dir + model_name,
+            f"./save/{model_name}",
             "-s",
             f"./save/apply-{model_name}",
         ]
@@ -153,17 +149,19 @@ if Path(args.data_source).is_file():
         id=args.data_source,
         configs_dir=Path(args.data_source).parent,
     )
-    if celltype_col is None:
-        celltype_col = "int" + str_celltype_col
-        adata.obs[celltype_col] = scf.utils.category_str2int(
-            adata.obs[str_celltype_col]
-        )
 elif args.data_source == "pbmc_dataset":
-    adata = getattr(scvi.data, args.data_source)()
-    celltype_col = "labels"
-    str_celltype_col = "str_labels"
+    adata = sc.datasets.pbmc3k_processed()
+    adata.obs["batch"] = (adata.obs["n_genes"] > adata.obs["n_genes"].mean()).astype(
+        int
+    )
+    adata.var["gene_symbols"] = adata.var.index
+    str_celltype_col = "louvain"
     gene_col = "gene_symbols"
     batch_key = "batch"
+    celltype_col = None
+if celltype_col is None:
+    celltype_col = "int" + str_celltype_col
+    adata.obs[celltype_col] = scf.utils.category_str2int(adata.obs[str_celltype_col])
 
 # sc.pp.filter_genes(adata, min_counts=3 / 10000 * adata.n_obs)
 
@@ -189,7 +187,10 @@ logger.info(adata)
 
 # %% [markdown]
 # # Tokenize input
-all_counts = adata.layers["counts"].A
+if isinstance(adata.layers["counts"], np.ndarray):
+    all_counts = adata.layers["counts"]
+else:
+    all_counts = adata.layers["counts"].A
 
 num_of_non_zero_genes = [
     np.count_nonzero(all_counts[i]) for i in range(all_counts.shape[0])
@@ -230,16 +231,16 @@ model = TransformerModel(
     pad_token=model_configs["pad_token"],
     pad_value=model_configs["pad_value"],
 )
-try:
-    model.load_state_dict(torch.load(model_file))
-except:
-    from collections import OrderedDict
-
-    params = OrderedDict()
-    for key, value in torch.load(model_file).items():
-        params[key.replace("module.", "")] = value
-    model.load_state_dict(params)
 model.to(device)
+try:
+    model.load_state_dict(torch.load(model_file, map_location=device))
+except:
+    params = model.state_dict()
+    for key, value in torch.load(model_file, map_location=device).items():
+        # only load params that are in the current model
+        if key in model.state_dict() and model.state_dict()[key].shape == value.shape:
+            params[key] = value
+    model.load_state_dict(params)
 model.eval()
 
 # %% [markdown]
@@ -350,32 +351,6 @@ fig.savefig(
     bbox_inches="tight",
 )
 
-# %% [markdown]
-# ### clustering
-
-# the scanpy leiden used the above computed neighbors
-sc.tl.leiden(adata, key_added="leiden_scFormer", resolution=0.5)
-
-target_labels = scf.utils.category_str2int(adata.obs[str_celltype_col].values)
-pred_labels = scf.utils.category_str2int(adata.obs["leiden_scFormer"].values)
-
-# ARI and NMI
-ari = adjusted_rand_score(target_labels, pred_labels)
-nmi = normalized_mutual_info_score(target_labels, pred_labels)
-logger.info(f"ARI: {ari:.3f}, NMI: {nmi:.3f}")
-
-fig = sc.pl.umap(
-    adata,
-    color=["leiden_scFormer"],
-    frameon=False,
-    title=f"ARI: {ari:.3f}, NMI: {nmi:.3f}",
-    return_fig=True,
-)
-fig.savefig(
-    save_dir / f"clustering[{args.cell_emb_mode}].png",
-    bbox_inches="tight",
-)
-
 # %% scib metrics
 import scib
 
@@ -388,29 +363,24 @@ results = scib.metrics.metrics(
     batch_key=batch_key,
     label_key=str_celltype_col,
     embed="X_scFormer",
-    isolated_labels_asw_=True,
-    silhouette_=True,
+    isolated_labels_asw_=False,
+    silhouette_=False,
     hvg_score_=False,
     graph_conn_=True,
-    pcr_=True,
-    isolated_labels_f1_=True,
+    pcr_=False,
+    isolated_labels_f1_=False,
     trajectory_=False,
     nmi_=True,  # use the clustering, bias to the best matching
     ari_=True,  # use the clustering, bias to the best matching
     cell_cycle_=False,
     kBET_=False,  # kBET return nan sometimes, need to examine
-    ilisi_=True,
-    clisi_=True,
+    ilisi_=False,
+    clisi_=False,
 )
 
 logger.info(f"{results}")
 
-results = results[0].to_dict()
-logger.info(
-    "Biological Conservation Metrics: \n"
-    f"ASW (cell-type): {results['ASW_label']:.4f}, graph cLISI: {results['cLISI']:.4f}, "
-    f"isolated label silhouette: {results['isolated_label_silhouette']:.4f}, \n"
-    "Batch Effect Removal Metrics: \n"
-    f"PCR_batch: {results['PCR_batch']:.4f}, ASW (batch): {results['ASW_label/batch']:.4f}, "
-    f"graph connectivity: {results['graph_conn']:.4f}, graph iLISI: {results['iLISI']:.4f}"
-)
+results = results[0].dropna().to_dict()
+
+with open(save_dir / "results.json", "w") as f:
+    json.dump(results, f)
