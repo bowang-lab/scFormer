@@ -18,3 +18,4 @@ python-igraph<=0.9.11
 torch==1.9.1
 torchtext==0.10.1
 setuptools==59.5.0
+IPython
